@@ -1,0 +1,17 @@
+class Solution:
+    def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        queue = [(root, 0)]
+        width  = 0
+        while queue:
+            n1 = queue[0][1]
+            n2 = queue[-1][1]
+            width = max(width, n2-n1+1)
+            
+            for i in range(len(queue)):
+                node, index = queue.pop(0)
+                if node.left:
+                    queue.append((node.left, 2*index))
+                if node.right:
+                    queue.append((node.right, 2*index+1))
+        
+        return width
